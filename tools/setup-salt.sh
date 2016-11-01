@@ -138,6 +138,7 @@ elif [ "$1" = "minion" ]; then
   echo -e "Finished.\nYou can now proceed with the script on the server, accepting the the fingerprint $fingerprint there."
 
 else
+  echo -e "ERROR: no argument given.\n"
   usage
   exit 1
 fi
