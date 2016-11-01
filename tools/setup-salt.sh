@@ -74,7 +74,7 @@ if  [ "$1" = "master" ]; then
   for host in $unaccepted_hosts; do
     key=`salt-key --finger=$host | sed "s/$host:  //" | egrep "^([0-9a-f]{2}:){15}[0-9a-f]{2}$"`
     yn=
-    read -p "Would you like to accept key '$key'? [Y/n]" yn
+    read -p "Accept host '$host' with key '$key'? [Y/n]" yn
     if [ "$yn" = "y" -o "$yn" = "Y" -o "$yn" = "" ]; then
       salt-key -a $key
     fi
