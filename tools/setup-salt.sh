@@ -76,7 +76,7 @@ if  [ "$1" = "master" ]; then
     yn=
     read -p "Accept host '$host' with key '$key'? [Y/n]" yn
     if [ "$yn" = "y" -o "$yn" = "Y" -o "$yn" = "" ]; then
-      salt-key -a $key
+      salt-key -a $host
     fi
   done
 
