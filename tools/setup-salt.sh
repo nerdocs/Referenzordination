@@ -33,7 +33,7 @@ setup_repos() {
   echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" > \
     /etc/apt/sources.list.d/saltstack.list
 
-  apt update > /dev/null
+  apt-get update > /dev/null
 }
 
 
@@ -53,7 +53,7 @@ if  [ "$1" = "master" ]; then
   setup_repos
 
   # Installing salt-master if not already installed
-  dpkg -l salt-master >/dev/null || apt install salt-master -y > /dev/null
+  dpkg -l salt-master >/dev/null || apt-get install salt-master -y > /dev/null
 
   masterkey=$(salt-key  -F master |grep master.pub | cut -d " " -f3)
 
@@ -87,7 +87,7 @@ elif [ "$1" = "minion" ]; then
 
   setup_repos
 
-  dpkg -l salt-minion >/dev/null || apt install salt-minion -y
+  dpkg -l salt-minion >/dev/null || apt-get install salt-minion -y
 
   minion_config_file="/etc/salt/minion"
   if [ ! -f $minion_config_file ]; then
