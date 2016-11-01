@@ -28,7 +28,7 @@ die() {
 
 setup_repos() {
   # setup repos
-  wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub | apt-key add -
+  wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub | apt-key add - 
 
   echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" > \
     /etc/apt/sources.list.d/saltstack.list
@@ -108,7 +108,7 @@ elif [ "$1" = "minion" ]; then
   done
 
   line=`egrep "^#?master_finger: *'.*' *$" $minion_config_file`
-  if [ egrep "^ *master_finger: *'$masterkey' *$" $minion_config_file ]; then
+  if egrep "^ *master_finger: *'$masterkey' *$" $minion_config_file; then
 
     echo "Master key fingerprint is already in the salt minion config present. Skipping."
 
