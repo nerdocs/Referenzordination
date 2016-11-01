@@ -109,7 +109,7 @@ elif [ "$1" = "minion" ]; then
 
   # get the local fingerprint, extract and trim it
   fingerprint=`salt-call --local key.finger | egrep "^ *([0-9a-f]{2}:){15}[0-9a-f]{2}$" | xargs`
-  if [ "$(fingerprint)" = "" ]]; then
+  if [ "$(fingerprint)" = "" ]; then
     die "Minion fingerprint could not be correctly parsed."
   fi
 
