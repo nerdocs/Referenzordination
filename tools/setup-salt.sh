@@ -113,7 +113,6 @@ elif [ "$1" = "minion" ]; then
     echo "Master key fingerprint is already in the salt minion config present. Skipping."
 
   elif [ "$line" != ""  ]; then
-    printf "The minion config file contains the line\n\n$line\n"
     sed -i -e "s/^#?master_finger: *'.*' *$/master_finger: '$masterkey'/"
   fi
 
