@@ -42,13 +42,13 @@ echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" >
 apt update
 
 # Master setup
-if  [ "$1" == "master" ]; then
+if  [ "$1" = "master" ]; then
   echo "Installing salt-master..."
   apt-get install salt-master -y
   
   masterkey=$(salt-key  -F master |grep master.pub | cut -d " " -f3)
 
-  if [ "$masterkey" == "" ]; then
+  if [ "$masterkey" = "" ]; then
     die "Master key could not be retrieved."
   fi
 
@@ -66,7 +66,7 @@ if  [ "$1" == "master" ]; then
     key=`salt-key --finger=$host | sed "s/$host:  /" | egrep "^([0-9a-f]{2}:){15}[0-9a-f]{2}$"`
     yn=
     read -p "Would you like to accept key '$key'? [Y/n]" yn
-    if [ "$yn" == "y" -o "$yn" == "Y" -o "$yn" == "" ]; then
+    if [ "$yn" = "y" -o "$yn" = "Y" -o "$yn" = "" ]; then
       salt-key -a $key
     fi
   done
@@ -74,7 +74,7 @@ if  [ "$1" == "master" ]; then
   echo "Finished."
 
 # Minion setup
-elif [ "$1" == "minion" ]; then
+elif [ "$1" = "minion" ]; then
 
   apt-get install salt-minion -y
 
@@ -90,7 +90,7 @@ elif [ "$1" == "minion" ]; then
   echo -n "Server fingerprint (or [Ctrl-C] to abort): "
 
   masterkey=
-  while [ a$(echo "$masterkey"|xargs) == "a" ]; do
+  while [ a$(echo "$masterkey"|xargs) = "a" ]; do
     read masterkey
     # basically validate fingerprint string...
     masterkey=`echo $masterkey | xargs| egrep "^([0-9a-f]{2}:){15}[0-9a-f]{2}$"`
@@ -109,11 +109,11 @@ elif [ "$1" == "minion" ]; then
 
   # get the local fingerprint, extract and trim it
   fingerprint=`salt-call --local key.finger | egrep "^ *([0-9a-f]{2}:){15}[0-9a-f]{2}$" | xargs`
-  if [ "$(fingerprint)" == "" ]]; then
+  if [ "$(fingerprint)" = "" ]]; then
     die "Minion fingerprint could not be correctly parsed."
   fi
 
-  if [ "$2" == "" ]; then
+  if [ "$2" = "" ]; then
     master="salt"
   else
     master="$2"
