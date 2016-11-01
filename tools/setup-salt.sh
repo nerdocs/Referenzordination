@@ -7,7 +7,7 @@
 
 usage() {
   echo "Usage: setup-salt.sh <master|minion [master-IP]>"
-  echo 
+  echo
   echo "Arguments:"
   echo "  master              This computer is a salt master server"
   echo "  minion [master-IP]  This computer is a salt minion"
@@ -27,9 +27,9 @@ die() {
 }
 
 setup_repos() {
-  # setup repos 
+  # setup repos
   wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub | apt-key add -
-  
+
   echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" > \
     /etc/apt/sources.list.d/saltstack.list
 
@@ -54,7 +54,7 @@ if  [ "$1" = "master" ]; then
 
   # Installing salt-master if not already installed
   dpkg -l salt-master >/dev/null || apt install salt-master -y > /dev/null
-  
+
   masterkey=$(salt-key  -F master |grep master.pub | cut -d " " -f3)
 
   if [ "$masterkey" = "" ]; then
@@ -64,7 +64,7 @@ if  [ "$1" = "master" ]; then
   echo "Please run this script now at a salt minion (ore more) and enter this key when asked:"
   echo
   echo "   $masterkey"
-  echo 
+  echo
   echo "When all clients are finished, Press [Enter], or [Ctrl-C] to abort."
   read yn
 
@@ -90,7 +90,7 @@ elif [ "$1" = "minion" ]; then
   dpkg -l salt-minion >/dev/null || apt install salt-minion -y
 
   minion_config_file="/etc/salt/minion"
-  if [ ! -f $minion_config_file ]; then 
+  if [ ! -f $minion_config_file ]; then
     die "Minion config file $minion_config_file was not found.\nPlease check that salt-minion is correctly installed."
   fi
 
@@ -106,7 +106,7 @@ elif [ "$1" = "minion" ]; then
     # basically validate fingerprint string...
     masterkey=`echo $masterkey | xargs| egrep "^([0-9a-f]{2}:){15}[0-9a-f]{2}$"`
   done
-  
+
   line=`egrep "^#?master_finger: *'.*' *$" $minion_config_file`
   if [ egrep "^ *master_finger: *'$masterkey' *$" $minion_config_file ]; then
 
@@ -129,7 +129,7 @@ elif [ "$1" = "minion" ]; then
   else
     master="$2"
   fi
-  
+
   ping -c1 $master || die "Master '$master' is not reachable in the network."
 
   # Update master IP in the minion config file
