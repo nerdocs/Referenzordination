@@ -65,7 +65,7 @@ if  [ "$1" = "master" ]; then
   echo
   echo "   $masterkey"
   echo
-  echo "When all clients are finished, Press [Enter], or [Ctrl-C] to abort."
+  echo "When all clients are finished, Press [Enter]."
   read yn
 
   # Retrieve all keys from clients that are connected
@@ -98,7 +98,7 @@ elif [ "$1" = "minion" ]; then
   echo "running this script there, or by calling 'salt -F master' on the server."
   echo "The fingerprint must be in the format XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX to"
   echo "be accepted."
-  echo -n "Server fingerprint (or [Ctrl-C] to abort): "
+  echo -n "Server fingerprint: "
 
   masterkey=
   while [ a$(echo "$masterkey"|xargs) = "a" ]; do
