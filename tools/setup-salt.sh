@@ -22,7 +22,7 @@ usage() {
 
 
 die() {
-  printf "ERROR: $1"
+  printf "ERROR: $1\n"
   exit 1
 }
 
