@@ -43,8 +43,8 @@ apt update > /dev/null
 
 # Master setup
 if  [ "$1" = "master" ]; then
-  echo "Installing salt-master..."
-  apt-get install salt-master -y
+  # Installing salt-master if not already installed
+  dpkg -l salt-master >/dev/null || apt install salt-master -y > /dev/null
   
   masterkey=$(salt-key  -F master |grep master.pub | cut -d " " -f3)
 
@@ -76,7 +76,7 @@ if  [ "$1" = "master" ]; then
 # Minion setup
 elif [ "$1" = "minion" ]; then
 
-  apt-get install salt-minion -y
+  dpkg -l salt-minion >/dev/null || apt install salt-minion -y
 
   minion_config_file="/etc/salt/minion"
   if [ ! -f $minion_config_file ]; then 
