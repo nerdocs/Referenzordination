@@ -42,7 +42,7 @@ echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" >
 apt update
 
 # Master setup
-if  [ $1 == "master" ]; then
+if  [ "$1" == "master" ]; then
   echo "Installing salt-master..."
   apt-get install salt-master -y
   
@@ -74,7 +74,7 @@ if  [ $1 == "master" ]; then
   echo "Finished."
 
 # Minion setup
-elif [ $1 == "minion" ]; then
+elif [ "$1" == "minion" ]; then
 
   apt-get install salt-minion -y
 
