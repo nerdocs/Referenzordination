@@ -67,7 +67,8 @@ if  [ $1 == "master" ]; then
     yn=
     read -p "Would you like to accept key '$key'? [Y/n]" yn
     if [ "$yn" == "y" -o "$yn" == "Y" -o "$yn" == "" ]; then
-    salt-key -a $key
+      salt-key -a $key
+    fi
   done
 
   echo "Finished."
