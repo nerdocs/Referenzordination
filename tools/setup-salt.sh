@@ -9,10 +9,11 @@ usage() {
   echo "Usage: setup-salt.sh <master|minion [master-IP]>"
   echo 
   echo "Arguments:"
-  echo "master              This computer is a salt master server"
-  echo "minion [master-IP]  This computer is a salt minion"
-  echo "                    You optionally can provide a master IP address"
-  echo "                    If not, salt will default to 'salt' as master server hostname"
+  echo "  master              This computer is a salt master server"
+  echo "  minion [master-IP]  This computer is a salt minion"
+  echo "                      You optionally can provide a master IP address"
+  echo "                      If not, salt will default to 'salt' as master"
+  echo "                      server hostname"
   echo
   echo "You can run this script on both server and client at the same time, "
   echo "they will wait for user input at neuralgic steps."
