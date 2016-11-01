@@ -22,7 +22,7 @@ usage() {
 
 
 die() {
-  echo -e "ERROR: $1"
+  printf "ERROR: $1"
   exit 1
 }
 
@@ -113,7 +113,7 @@ elif [ "$1" = "minion" ]; then
     echo "Master key fingerprint is already in the salt minion config present. Skipping."
 
   elif [ "$line" != ""  ]; then
-    echo -e "The minion config file contains the line\n\n$line\n"
+    printf "The minion config file contains the line\n\n$line\n"
     sed -i -e "s/^#?master_finger: *'.*' *$/master_finger: '$masterkey'/"
   fi
 
@@ -138,10 +138,10 @@ elif [ "$1" = "minion" ]; then
   # restart salt-minion so that changes can take effect
   systemctl restart salt-minion.service
 
-  echo -e "Finished.\nYou can now proceed with the script on the server, accepting the the fingerprint $fingerprint there."
+  printf "Finished.\nYou can now proceed with the script on the server, accepting the the fingerprint $fingerprint there."
 
 else
-  echo -e "ERROR: no argument given.\n"
+  printf "ERROR: no argument given.\n"
   usage
   exit 1
 fi
