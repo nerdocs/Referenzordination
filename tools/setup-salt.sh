@@ -25,14 +25,6 @@ die() {
   exit 1
 }
 
-
-if [ $(whoami) != "root" ]; then
-  echo "you must be root to execute this file."
-  exit 1
-fi
-
-# Setup for both, master + minion
-
 setup_repos() {
   # setup repos 
   wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub | apt-key add -
@@ -42,6 +34,16 @@ setup_repos() {
 
   apt update > /dev/null
 }
+
+
+if [ $(whoami) != "root" ]; then
+  echo "you must be root to execute this file."
+  exit 1
+fi
+
+# Setup for both, master + minion
+
+
 
 
 # Master setup
