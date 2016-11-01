@@ -130,7 +130,7 @@ elif [ "$1" = "minion" ]; then
     master="$2"
   fi
 
-  ping -c1 $master || die "Master '$master' is not reachable in the network."
+  ping -c1 $master >/dev/null || die "Master '$master' is not reachable in the network."
 
   # Update master IP in the minion config file
   sed -i -e "s/^ *#? *master:.*$/master: $2/" $minion_config_file
