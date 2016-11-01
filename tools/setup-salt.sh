@@ -33,16 +33,22 @@ fi
 
 # Setup for both, master + minion
 
-# setup repos 
-wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub | apt-key add -
+setup_repos() {
+  # setup repos 
+  wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub | apt-key add -
+  
+  echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" > \
+    /etc/apt/sources.list.d/saltstack.list
 
-echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" > \
-  /etc/apt/sources.list.d/saltstack.list
+  apt update > /dev/null
+}
 
-apt update > /dev/null
 
 # Master setup
 if  [ "$1" = "master" ]; then
+
+  setup_repos
+
   # Installing salt-master if not already installed
   dpkg -l salt-master >/dev/null || apt install salt-master -y > /dev/null
   
@@ -75,6 +81,8 @@ if  [ "$1" = "master" ]; then
 
 # Minion setup
 elif [ "$1" = "minion" ]; then
+
+  setup_repos
 
   dpkg -l salt-minion >/dev/null || apt install salt-minion -y
 
