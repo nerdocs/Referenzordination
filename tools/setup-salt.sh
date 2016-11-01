@@ -39,7 +39,7 @@ wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG
 echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main" > \
   /etc/apt/sources.list.d/saltstack.list
 
-apt update
+apt update > /dev/null
 
 # Master setup
 if  [ "$1" = "master" ]; then
